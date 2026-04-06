@@ -120,9 +120,18 @@ class Experiment:
         
         return self.noise_support_var0(t) * np.random.normal(0, sigma)
     
-    def apogee_var0(self):
+    def apogee_var0(self, i, j):
         
-        return np.random.uniform((0, 0), (self.width, self.height), 2)
+        x_min, y_min, x_max, y_max = 0, 0, self.width, self.height
+        
+        if 0 <= i < 4: 
+            x_min, y_min, x_max, y_max = 0, j * self.h, 4 * self.w, (j + 1) * self.h
+        elif 4 <= i < 7:
+            x_min, y_min, x_max, y_max = 4 * self.w, j * self.h, 7 * self.w, (j + 1) * self.h
+        elif 7 <= i < 11:
+            x_min, y_min, x_max, y_max = 7 * self.w, j * self.h, 11 * self.w, (j + 1) * self.h
+        
+        return np.random.uniform((x_min, y_min), (x_max, y_max), 2)
     
     def apogee_var1(self, x0, y0):
         
@@ -166,7 +175,7 @@ class Experiment:
             #p_ellipse = self.apogee_var1(x0, y0)
             #print(p_ellipse)
             
-            p_ellipse = self.apogee_var0()
+            p_ellipse = self.apogee_var0(i, j)
             
             self.cells[char] = {
                 'id': id,
@@ -272,11 +281,14 @@ class Experiment:
                     #dy = params['amplitude_y'] * speed if self.data_config['y_move'] else 0
                     
                     x0, y0 = i * self.w + self.w / 2, j * self.h + self.h / 2
+                    
+                    xd, yd = x0, y0 + self.h / 3
+                    
                     x1, y1 = params['p_ellipse']
                     
-                    xc, yc = (x0 + x1) / 2, (y0 + y1) / 2
+                    xc, yc = (xd + x1) / 2, (yd + y1) / 2
                     
-                    ax, ay = (x0 - x1) / 2, (y0 - y1) / 2
+                    ax, ay = (xd - x1) / 2, (yd - y1) / 2
                     
                     a_norm = np.sqrt(ax ** 2 + ay ** 2)
                     
