@@ -306,6 +306,8 @@ class Experiment:
                     #dx += noise
                     #dy += noise
                     
+                    pygame.draw.rect(self.screen, (100, 100, 100), (i * self.w, j * self.h, self.w, self.h), 1)
+                    
                     self.screen.blit(params['letter'], (x0 - params['letter'].get_width() / 2, y0 - params['letter'].get_height() / 2))
                     
                     pygame.draw.circle(self.screen, params['circle_color'], (dx, dy), self.circle_radius, 0)
