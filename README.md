@@ -4,6 +4,7 @@
 
 1. 0.0 - moving symbols horizontally or vertically with small amplitude
 2. 0.1 - still symbols and moving random color circles
-3. 0.2 - to do
+3. 0.2 - random elliptic moving circles
+4. 0.3 - specific elliptic moving circles
 
 ## Paradigm_1 - PyQt/PySide - to do
