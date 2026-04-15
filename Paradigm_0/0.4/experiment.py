@@ -4,6 +4,7 @@ import numpy as np
 from datetime import datetime
 from scipy.stats import rv_continuous
 from distributions import Absolute
+import json
 
 class Experiment:
     
@@ -14,6 +15,8 @@ class Experiment:
         self.sentence = self.data_config['sentence']
         self.circle_color = self.data_config['circle_color']
         self.circle_radius = self.data_config['circle_radius']
+        
+        
         
     
     def fit(self):
@@ -73,10 +76,16 @@ class Experiment:
         self.delay = self.data_config['delay']
         self.prepare_rest = self.data_config['prepare_rest']
         
-        self.path = f'logs\logs_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.txt'
-        os.makedirs(os.path.dirname(self.path), exist_ok = True)
+        self.time_now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         
-        self.f = open(self.path, 'w', encoding = 'utf-8')
+        self.path_log = f'logs\logs_{self.time_now}.txt'
+        os.makedirs(os.path.dirname(self.path_log), exist_ok = True)
+        
+        self.f = open(self.path_log, 'w', encoding = 'utf-8')
+        
+        with open(f'logs\settings_{self.time_now}.json', 'w', encoding = 'utf-8') as f:
+            json.dump(self.data_config, f, indent = 4, ensure_ascii = False)        
+        
         
         self.delta_circle = self.data_config['delta_circle']
         
@@ -146,7 +155,8 @@ class Experiment:
         return Absolute(a = 0, b = self.width).rvs(x0), Absolute(a = 0, b = self.height).rvs(y0)
     
     def apogee_var2(self, i, j):
-        ran = np.random.randint(0, 2)
+        #ran = np.random.randint(0, 2)
+        ran = 1
         x = (i - 1 + 3 * ran) * self.w + (2 * ran - 1) * self.w / 2
         x += (1 - 2 * ran) * 2 * self.circle_radius * self.delta_circle
         #print(x)
