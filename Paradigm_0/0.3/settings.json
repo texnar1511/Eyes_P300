@@ -15,13 +15,13 @@
     "frequency_std": 0.4,
     "amplitude_x_scale": 2.5,
     "amplitude_y_scale": 2.5,
-    "t1_a": 0.5,
-    "t1_b": 1.5,
-    "t2_a": 0.5,
-    "t2_b": 1.5,
+    "t1_a": 1,
+    "t1_b": 3,
+    "t2_a": 0,
+    "t2_b": 0,
     "sentence": "НЕЙРОНАУКА",
     "prepare_rest": 5000,
     "circle_radius": 15,
     "circle_color": 200,
-    "acceleration": 2.0
+    "acceleration": 1.0
 }

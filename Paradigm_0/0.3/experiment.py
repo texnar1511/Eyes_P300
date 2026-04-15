@@ -144,7 +144,7 @@ class Experiment:
     def apogee_var2(self, i, j):
         ran = np.random.randint(0, 2)
         x = (i - 1 + 3 * ran) * self.w + (2 * ran - 1) * self.w / 2
-        print(x)
+        #print(x)
         #print(np.random.randint(0, 2))
         if i in [0, 2, 4, 7, 9]:
             x = (i + 2) * self.w - self.circle_radius * self.delta_circle
