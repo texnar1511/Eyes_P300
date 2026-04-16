@@ -5,6 +5,7 @@ from datetime import datetime
 from scipy.stats import rv_continuous
 from distributions import Absolute
 import json
+import colorsys
 
 class Experiment:
     
@@ -177,6 +178,21 @@ class Experiment:
             x = (i + 1) * self.w - self.circle_radius * self.delta_circle
         y = (j + 1) * self.h - self.circle_radius * self.delta_circle
         return x, y
+    
+    def random_color0(self):
+        
+        return np.random.randint(0, 256, 3)
+    
+    def random_color1(self):
+
+        h = np.random.random()
+        s = np.random.uniform(0.6, 1.0)
+        l = np.random.uniform(0.4, 0.6)
+        
+        color = (np.array(colorsys.hls_to_rgb(h, l, s)) * 255).astype(int)
+        
+        return color
+        
 
 
     def lslinit(self):
@@ -233,7 +249,7 @@ class Experiment:
                 'start_t': 0,
                 'start_marker': False,
                 'end_marker': False,
-                'circle_color': np.random.randint(0, 256, 3),
+                'circle_color': self.random_color1(),
                 'b_ellipse': 10,
                 'p_ellipse': p_ellipse,
                 'start_ellipse': st_ell,
