@@ -32,5 +32,11 @@
         100,
         100
     ],
-    "num_samples": 11
+    "num_samples": 11,
+    "lowpass_filter": 0.5,
+    "highpass_filter": 70,
+    "rejection_filter": 50,
+    "channels": [
+        "Aux1.1 diff Aux1.2"
+    ]
 }
