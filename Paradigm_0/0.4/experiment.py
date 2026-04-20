@@ -84,6 +84,8 @@ class Experiment:
         
         self.f = open(self.path_log, 'w', encoding = 'utf-8')
         
+        self.data_config['date'] = self.time_now
+        
         with open(f'logs\settings_{self.time_now}.json', 'w', encoding = 'utf-8') as f:
             json.dump(self.data_config, f, indent = 4, ensure_ascii = False)        
         
