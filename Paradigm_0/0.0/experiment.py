@@ -53,6 +53,8 @@ class Experiment:
         self.sec_in_msec = 1e-3
 
         self.t0_mean = self.data_config['t0_mean']
+        
+        self.num_samples = self.data_config['num_samples']
 
         self.t1_a = self.data_config['t1_a']
         self.t1_b = self.data_config['t1_b']
@@ -146,7 +148,8 @@ class Experiment:
                 'dir': random.randint(0, 1),
                 'start_t': 0,
                 'start_marker': False,
-                'end_marker': False
+                'end_marker': False,
+                'n_samp': 0
                 }
 
         self.running = True
@@ -229,6 +232,9 @@ class Experiment:
 
                         params['start_marker'] = False
                         params['end_marker'] = False
+                        
+                        
+                        params['n_samp'] += 1
 
                         speed = self.speed_func(t - params['start_t'], params['t0'], params['t1'], params['t2'], params['dir'])
 
@@ -239,6 +245,9 @@ class Experiment:
                     
                     self.screen.blit(params['letter'], (i * self.w + self.w / 2 - params['letter'].get_width() / 2 + dx, j * self.h + self.h / 2 - params['letter'].get_height() / 2 - dy))
 
+                    if char == target_letter and params['n_samp'] == self.num_samples:
+                        self.start_experiment = not self.start_experiment
+                        self.running = False
 
                 else:
                     dx = 0
