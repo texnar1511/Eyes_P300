@@ -2,6 +2,7 @@ import pygame, math, random, os
 from pylsl import StreamInfo, StreamOutlet, local_clock
 import numpy as np
 from datetime import datetime
+import json
 
 class Experiment:
     
@@ -65,10 +66,17 @@ class Experiment:
         self.delay = self.data_config['delay']
         self.prepare_rest = self.data_config['prepare_rest']
         
-        self.path = f'logs\logs_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.txt'
-        os.makedirs(os.path.dirname(self.path), exist_ok = True)
+        self.time_now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         
-        self.f = open(self.path, 'w', encoding = 'utf-8')
+        self.path_log = f'logs\logs_{self.time_now}.txt'
+        os.makedirs(os.path.dirname(self.path_log), exist_ok = True)
+        
+        self.f = open(self.path_log, 'w', encoding = 'utf-8')
+        
+        self.data_config['date'] = self.time_now
+        
+        with open(f'logs\settings_{self.time_now}.json', 'w', encoding = 'utf-8') as f:
+            json.dump(self.data_config, f, indent = 4, ensure_ascii = False)  
         
     
     def set_t1(self):
